@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Auth\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Route::get('/login', function(){
 })->name("login");
 
 Route::get('/register', function(){
-    return view('registrar');
+    return view('register');
 })->name("register");
 
 Route::get('/treino-em-andamento', function(){
@@ -63,6 +64,11 @@ Route::get('/troca-treino', function(){
 Route::get('/vencimento', function(){
     return view('expireDate');
 })->name("expireDate");
+
+Route::group(['middleware' => ['auth']], function() {
+
+    Route::get('/logout', [LogoutController::class, 'perform'])->name('logout');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

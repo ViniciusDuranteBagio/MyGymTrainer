@@ -18,7 +18,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone');
+            $table->string('gender', 1);
+            $table->integer('nr_score')->nullable();
+            $table->date('dt_birth');
             $table->string('password');
+            $table->string('workout_focus')->nullable();
+            $table->date('workout_updated_at')->nullable();
+            $table->date('contract_dueDate')->nullable();
+            $table->boolean('fg_change_workout')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

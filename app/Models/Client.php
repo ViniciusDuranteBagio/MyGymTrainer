@@ -27,7 +27,7 @@ protected $casts = [
     'birth' => 'date'
 ];
 
-public function createOrFail( array $data): array
+public function createOrFail( array $data)
 {
     $email = $data['email'];
     $clientExists = Client::where('email', '=', $email)->first();
@@ -41,7 +41,7 @@ public function createOrFail( array $data): array
     return [ 'error' => 'já existe um cliente cadastrado com esse email '];
 }
 
-public function createAndReturnPk( array $data): array 
+public function createAndReturnPk( array $data)
 {
     $client = Client::create($data);
     $client->refresh();
