@@ -17,7 +17,6 @@ class ExerciseFactory extends Factory
     public function definition()
     {
         return [
-            'nm_exercise' => $this->faker->name(),
             'im_exercise' => $this->faker->filePath(),
             'description' => $this->faker->text()
         ];

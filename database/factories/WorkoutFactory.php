@@ -17,10 +17,7 @@ class WorkoutFactory extends Factory
     public function definition()
     {
         return [
-            'nm_workout' => $this->faker->firstName(),
-            'rep_sets' => $this->faker->numberBetween(1,20),
-            'weight' => $this->faker->numberBetween(1,100),
-            'fk_exercise' => $this->faker->numberBetween(1,10)
+            'average_workout_time' => $this->faker->time
         ];
     }
 }

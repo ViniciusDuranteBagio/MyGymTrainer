@@ -14,6 +14,35 @@ class WorkoutSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Workout::factory(10)->create();
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Perna'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Braço'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Costas'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Ombro'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Aerobico'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Posterior e Gluteos'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Quadriceps'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Triceps'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Abdomen'
+        ]);
+        \App\Models\Workout::factory()->create([
+            'nm_workout' => 'Treino de Peito'
+        ]);
     }
 }

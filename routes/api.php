@@ -2,10 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\WorkoutController;
-
+use \App\Http\Controllers\UsersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,11 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/clients', [ClientController::class, 'index']);
-Route::get('/client/{id}', [ClientController::class, 'show']);
-Route::post('/client', [ClientController::class, 'store']);
-Route::put('/client/{id}', [ClientController::class, 'update']);
-Route::delete('/client/{id}', [ClientController::class, 'destroy']);
+Route::get('/clients', [UsersController::class, 'index']);
+Route::get('/client/{id}', [UsersController::class, 'show']);
+Route::get('/clientWithWorkouts/{id}', [UsersController::class, 'getUserWithWorkout']);
+Route::post('/client', [UsersController::class, 'store']);
+Route::put('/client/{id}', [UsersController::class, 'update']);
+Route::delete('/client/{id}', [UsersController::class, 'destroy']);
+Route::get('/test', [UsersController::class, 'test']);
 
 Route::get('/exercises', [ExerciseController::class, 'index']);
 Route::post('/exercise', [ExerciseController::class, 'store']);
@@ -33,6 +34,8 @@ Route::post('/exercise', [ExerciseController::class, 'store']);
 //Route::delete('/exercise{{id}}', [ExerciseController::class, 'delete']);
 
 Route::get('/workouts', [WorkoutController::class, 'index']);
+Route::get('/workouts/{id}', [WorkoutController::class, 'show']);
 Route::post('/workout', [WorkoutController::class, 'store']);
 //Route::get('/workout{{id}}', [WorkoutController::class, 'show']);
 //Route::delete('/workout', [WorkoutController::class, 'delete']);
+

@@ -36,7 +36,8 @@ class WorkoutController extends Controller
      */
     public function show($id)
     {
-        //
+        $workout =  Workout::with('exercises')->findOrFail($id);
+        return $workout;
     }
 
     /**

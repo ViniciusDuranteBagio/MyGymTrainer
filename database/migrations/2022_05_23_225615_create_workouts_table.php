@@ -16,9 +16,7 @@ return new class extends Migration
         Schema::create('workouts', function (Blueprint $table) {
             $table->id();
             $table->string('nm_workout');
-            $table->integer('rep_sets');
-            $table->integer('weight');
-            $table->integer('fk_exercise');
+            $table->time('average_workout_time');
             $table->timestamps();
         });
     }

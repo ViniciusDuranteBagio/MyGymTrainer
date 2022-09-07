@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('weight')->nullable();
             $table->integer('rep');
             $table->integer('sets');
-            $table->time('average_workout_time');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workout_exercise');
+        Schema::dropIfExists('workoutExercise');
     }
 };
