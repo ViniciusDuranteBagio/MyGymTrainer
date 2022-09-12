@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserWorkoutHistory extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     /**

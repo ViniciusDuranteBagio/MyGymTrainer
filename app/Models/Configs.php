@@ -24,4 +24,8 @@ class Configs extends Model
      * @var string
      */
     protected $table = 'configs';
+
+    protected $hidden = [
+      'nm_config'
+    ];
 }

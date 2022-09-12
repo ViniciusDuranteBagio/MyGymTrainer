@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  */
 class WorkoutExercise extends Pivot
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
 

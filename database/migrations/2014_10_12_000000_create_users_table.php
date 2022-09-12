@@ -30,6 +30,17 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        \App\Models\User::factory()->create([
+            'name' => 'Vinicius Durante Bagio',
+            'email' => 'vinicius@hotmail.com',
+            'password' => bcrypt('12345678'),
+            'gender' => 'M',
+            'dt_birth' => '2000-12-12',
+            'workout_focus' => 'Emagrecimento',
+            'contract_dueDate' => '2022-12-12',
+            'fg_change_workout' => false
+        ]);
     }
 
     /**

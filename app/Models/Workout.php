@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Workout extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     /**
@@ -41,7 +42,7 @@ class Workout extends Model
 
 
     protected $fillable = [
-        'name',
+        'nm_workout',
         'average_workout_time'
     ];
 

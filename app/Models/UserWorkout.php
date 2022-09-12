@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  */
 class UserWorkout extends Pivot
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     /**
