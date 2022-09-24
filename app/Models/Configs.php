@@ -25,7 +25,10 @@ class Configs extends Model
      */
     protected $table = 'configs';
 
-    protected $hidden = [
-      'nm_config'
+
+    protected $fillable = [
+        'nm_config',
+        'value'
     ];
+
 }

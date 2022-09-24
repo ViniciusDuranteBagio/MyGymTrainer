@@ -39,10 +39,21 @@ class ExerciseCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('nm_exercise');
-        CRUD::column('im_exercise');
-        CRUD::column('description');
-
+        CRUD::addColumn([
+            'name' => 'nm_exercise',
+            'label' => 'Exercício',
+            'type' => 'text'
+        ]);
+        CRUD::addColumn([
+            'name' => 'im_exercise',
+            'label' => 'Caminho da Imagem',
+            'type' => 'text',
+        ]);
+        CRUD::addColumn([
+            'name' => 'description',
+            'label' => 'Descrição',
+            'type' => 'text',
+        ]);
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -52,7 +63,7 @@ class ExerciseCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -60,25 +71,69 @@ class ExerciseCrudController extends CrudController
     {
         CRUD::setValidation(ExerciseRequest::class);
 
-        CRUD::field('nm_exercise');
-        CRUD::field('im_exercise');
-        CRUD::field('description');
+        CRUD::addField([
+            'name' => 'nm_exercise',
+            'label' => 'Exercício',
+            'type' => 'text'
+        ]);
+        CRUD::addField([
+            'name' => 'im_exercise',
+            'label' => 'Caminho da Imagem',
+            'type' => 'text'
+        ]);
+        CRUD::addField([
+            'name' => 'description',
+            'label' => 'Descrição',
+            'type' => 'text'
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    // if you just want to show the same columns as inside ListOperation
+    protected function setupShowOperation()
+    {
+
+        CRUD::addColumn([
+            'name' => 'nm_exercise',
+            'label' => 'Exercício',
+            'type' => 'text'
+        ]);
+        CRUD::addColumn([
+            'name' => 'im_exercise',
+            'label' => 'Caminho da Imagem',
+            'type' => 'text',
+            'limit' => '200'
+        ]);
+        CRUD::addColumn([
+            'name' => 'description',
+            'label' => 'Descrição',
+            'type' => 'text',
+            'limit' => '2000'
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'created_at',
+            'label' => 'Data da Criação',
+            'type' => 'date'
+        ]);
+        CRUD::addColumn([ 'name' => 'updated_at',
+            'label' => 'Data de Modificação',
+            'type' => 'date']);
     }
 }

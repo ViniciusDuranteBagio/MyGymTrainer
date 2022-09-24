@@ -39,9 +39,16 @@ class WorkoutCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('nm_workout');
-        CRUD::column('average_workout_time');
-
+        CRUD::addColumn([
+            'name' => 'nm_workout',
+            'label' => 'Treino',
+            'type' => 'text',
+        ]);
+        CRUD::addColumn([
+            'name' => 'average_workout_time',
+            'label' => 'Tempo medio para a conclusão do treino',
+            'type' => 'time',
+        ]);
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -59,8 +66,16 @@ class WorkoutCrudController extends CrudController
     {
         CRUD::setValidation(WorkoutRequest::class);
 
-        CRUD::field('nm_workout');
-        CRUD::field('average_workout_time');
+        CRUD::addField([
+            'name' => 'nm_workout',
+            'label' => 'Treino',
+            'type' => 'text',
+        ]);
+        CRUD::addField([
+            'name' => 'average_workout_time',
+            'label' => 'Tempo medio para a conclusão do treino',
+            'type' => 'time',
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -78,5 +93,22 @@ class WorkoutCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    // if you just want to show the same columns as inside ListOperation
+    protected function setupShowOperation()
+    {
+        $this->setupListOperation();
+
+        CRUD::addColumn([
+            'name' => 'created_at',
+            'label' => 'Data da Criação',
+            'type' => 'date'
+        ]);
+        CRUD::addColumn([
+                      'name' => 'updated_at',
+            'label' => 'Data de Modificação',
+            'type' => 'date'
+        ]);
     }
 }

@@ -14,9 +14,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class UserWorkoutHistoryCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -39,19 +37,56 @@ class UserWorkoutHistoryCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('workout_id');
-        CRUD::column('exercise_id');
-        CRUD::column('user_id');
-        CRUD::column('weight');
-        CRUD::column('rep');
-        CRUD::column('sets');
-        CRUD::column('date');
 
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        CRUD::addColumn(([
+            'label'     => "Treino",
+            'type'      => 'select',
+            'name'      => 'workout_id',
+            'entity' => 'workouts',
+            'attribute' => 'nm_workout',
+            'model' => "App\Models\Workout"
+        ]));
+        CRUD::addColumn([
+            'label'     => "Exercício",
+            'type'      => 'select',
+            'name'      => 'exercise_id',
+            'entity' => 'exercises',
+            'attribute' => 'nm_exercise',
+            'model' => "App\Models\Exercise "
+        ]);
+        CRUD::addColumn([
+            'label'     => "Cliente",
+            'type'      => 'select',
+            'name'      => 'user_id',
+            'entity' => 'users',
+            'attribute' => 'name',
+            'model' => "App\Models\User"
+        ]);
+
+        CRUD::addColumn([
+           "label" => "Peso",
+            "name" => "weight",
+            "type" => "number"
+        ]);
+
+        CRUD::addColumn([
+           "label" => "Repetições",
+            "name" => "rep",
+            "type" => "number"
+        ]);
+
+        CRUD::addColumn([
+           "label" => "Series",
+            "name" => "sets",
+            "type" => "number"
+        ]);
+
+        CRUD::addColumn([
+           "label" => "Data da execução do treino",
+            "name" => "date",
+            "type" => "date"
+            // todo verificar formatação de data
+        ]);
     }
 
     /**
@@ -64,13 +99,55 @@ class UserWorkoutHistoryCrudController extends CrudController
     {
         CRUD::setValidation(UserWorkoutHistoryRequest::class);
 
-        CRUD::field('workout_id');
-        CRUD::field('exercise_id');
-        CRUD::field('user_id');
-        CRUD::field('weight');
-        CRUD::field('rep');
-        CRUD::field('sets');
-        CRUD::field('date');
+        CRUD::addField([
+            'label'     => "Treino",
+            'type'      => 'select',
+            'name'      => 'workout_id',
+            'model'     => "App\Models\Workout",
+            'attribute' => 'nm_workout',
+            'options'   => (function ($query) {
+                return $query->orderBy('nm_workout', 'ASC')->get();
+            }),
+        ]);
+
+        CRUD::addField([
+            'label'     => "Exercício",
+            'type'      => 'select',
+            'name'      => 'exercise_id',
+            'model'     => "App\Models\Exercise",
+            'attribute' => 'nm_exercise',
+            'options'   => (function ($query) {
+                return $query->orderBy('nm_exercise', 'ASC')->get();
+            }),
+        ]);
+        CRUD::addField([
+            'label'     => "Ususario",
+            'type'      => 'select',
+            'name'      => 'user_id',
+            'model'     => "App\Models\User",
+            'attribute' => 'name',
+            'options'   => (function ($query) {
+                return $query->orderBy('name', 'ASC')->get();
+            }),
+        ]);
+
+        CRUD::addField([
+            "label" => "Peso",
+            "name" => "weight",
+            "type" => "number"
+        ]);
+
+        CRUD::addField([
+            "label" => "Repetições",
+            "name" => "rep",
+            "type" => "number"
+        ]);
+
+        CRUD::addField([
+            "label" => "Series",
+            "name" => "sets",
+            "type" => "number"
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -88,5 +165,10 @@ class UserWorkoutHistoryCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    protected function setupShowOperation()
+    {
+        $this->setupListOperation();
     }
 }

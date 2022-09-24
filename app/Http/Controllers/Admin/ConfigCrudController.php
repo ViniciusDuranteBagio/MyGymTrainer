@@ -40,8 +40,14 @@ class ConfigCrudController extends CrudController
     protected function setupListOperation()
     {
 
-        CRUD::column('nm_config');
-        CRUD::column('value');
+        CRUD::addColumn( [
+            'name' => 'nm_config',
+            'label' => 'Configuração',
+            'type' => 'text'
+        ]);
+        CRUD::addColumn([ 'name' => 'value',
+            'label' => 'Valor',
+            'type' => 'text']);
 
 
         /**
@@ -61,8 +67,16 @@ class ConfigCrudController extends CrudController
     {
         CRUD::setValidation(ConfigRequest::class);
 
-        CRUD::field('nm_config');
-        CRUD::field('value');
+        CRUD::addField([
+            'name' => 'nm_config',
+            'label' => 'Configuração',
+            'type' => 'text'
+        ]);
+        CRUD::addField([
+            'name' => 'value',
+            'label' => 'Valor',
+            'type' => 'text'
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -81,4 +95,20 @@ class ConfigCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+    // if you just want to show the same columns as inside ListOperation
+    protected function setupShowOperation()
+    {
+        $this->setupListOperation();
+
+        CRUD::addColumn([
+            'name' => 'created_at',
+            'label' => 'Data da Criação',
+            'type' => 'date'
+        ]);
+        CRUD::addColumn([ 'name' => 'updated_at',
+            'label' => 'Data de Modificação',
+            'type' => 'date']);
+    }
+
 }

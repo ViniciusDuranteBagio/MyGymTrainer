@@ -39,14 +39,42 @@ class WorkoutExerciseCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('fk_workout');
-        CRUD::column('fk_exercise');
 
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+
+        CRUD::addColumn(([
+            'label'     => "Treino",
+            'type'      => 'select',
+            'name'      => 'workout_id',
+            'entity' => 'workouts',
+            'attribute' => 'nm_workout',
+            'model' => "App\Models\Workout"
+        ]));
+        CRUD::addColumn([
+            'label'     => "Exercício",
+            'type'      => 'select',
+            'name'      => 'exercise_id',
+            'entity' => 'exercises',
+            'attribute' => 'nm_exercise',
+            'model' => "App\Models\Exercise "
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'rep',
+            'label' => 'Repetições',
+            'type' => 'number'
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'sets',
+            'label' => 'Series',
+            'type' => 'number'
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'weight',
+            'label' => 'Peso',
+            'type' => 'number'
+        ]);
     }
 
     /**
@@ -59,24 +87,72 @@ class WorkoutExerciseCrudController extends CrudController
     {
         CRUD::setValidation(WorkoutExerciseRequest::class);
 
-        CRUD::field('fk_workout');
-        CRUD::field('fk_exercise');
+        CRUD::addField([
+            'label'     => "Treino",
+            'type'      => 'select',
+            'name'      => 'workout_id',
+            'model'     => "App\Models\Workout",
+            'attribute' => 'nm_workout',
+            'options'   => (function ($query) {
+                return $query->orderBy('nm_workout', 'ASC')->get();
+            }),
+        ]);
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        CRUD::addField([
+            'label'     => "Exercício",
+            'type'      => 'select',
+            'name'      => 'exercise_id',
+            'model'     => "App\Models\Exercise",
+            'attribute' => 'nm_exercise',
+            'options'   => (function ($query) {
+                return $query->orderBy('nm_exercise', 'ASC')->get();
+            }),
+        ]);
+
+        CRUD::addField([
+            'name' => 'rep',
+            'label' => 'Repetições',
+            'type' => 'number'
+        ]);
+
+        CRUD::addField([
+            'name' => 'sets',
+            'label' => 'Series',
+            'type' => 'number'
+        ]);
+
+        CRUD::addField([
+            'name' => 'weight',
+            'label' => 'Peso',
+            'type' => 'number'
+        ]);
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    // if you just want to show the same columns as inside ListOperation
+    protected function setupShowOperation()
+    {
+        $this->setupListOperation();
+
+        CRUD::addField([
+            'name' => 'created_at',
+            'label' => 'Data da Criação',
+            'type' => 'date'
+            //todo olhar o formato das datas
+        ]);
+
+        CRUD::addField([ 'name' => 'updated_at',
+            'label' => 'Data de Modificação',
+            'type' => 'date']);
     }
 }

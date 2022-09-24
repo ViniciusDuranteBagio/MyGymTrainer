@@ -50,16 +50,22 @@ class WorkoutExercise extends Pivot
      * @var array<int, string>
      */
     protected $fillable = [
-        'fk_workout',
-        'fk_exercise'
-    ];
-
-    protected $hidden = [
         'workout_id',
         'exercise_id',
+        'weight',
+        'rep',
+        'sets'
     ];
 
+    public function workouts()
+    {
+        return $this->hasMany(Workout::class, 'id');
+    }
 
+    public function exercises()
+    {
+        return $this->hasMany(Exercise::class, 'id');
+    }
 
 
 }
