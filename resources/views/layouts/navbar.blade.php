@@ -49,22 +49,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                           <h5 class="nav-link text-white"> Olá ClientName para onde deseja ir ? </h5>
+                           <h5 class="nav-link text-white"> Olá {{Auth::user()->name}} para onde deseja ir ? </h5>
                         </li>
                        <li class="nav-item">
                            <a class="nav-link text-white" href="{{ route('ranking') }}"><i class="fa-solid fa-medal me-2"></i>Ranking</a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link text-white" href="{{ route('workout') }}"><i class="fa-solid fa-dumbbell me-2"></i>Treino</a>
+                           <a class="nav-link text-white" href="{{ route('workout',['id' => Auth::id()])}}"><i class="fa-solid fa-dumbbell me-2"></i>Treino</a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link text-white" href="{{ route('myAccount') }}"><i class="fa-solid fa-address-card me-2"></i>Minha Conta</a>
+                           <a class="nav-link text-white" href="{{ route('myAccount', ['id' => Auth::id()])}}"><i class="fa-solid fa-address-card me-2"></i>Minha Conta</a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link text-white" href="{{ route('changeWorkout') }}"><i class="fa-solid fa-right-left me-2"></i>Mudança de Treino</a>
+                           <a class="nav-link text-white" href="{{ route('changeWorkout', ['id' => Auth::id()])}}"><i class="fa-solid fa-right-left me-2"></i>Mudança de Treino</a>
                        </li>
                        <li class="nav-item">
-                           <a class="nav-link text-white" href="{{ route('expireDate') }}"><i class="fa-solid fa-barcode me-2"></i>Expiração de contrato</a>
+                           <a class="nav-link text-white" href="{{ route('expireDate',['id' => Auth::id()]) }}"><i class="fa-solid fa-barcode me-2"></i>Expiração de contrato</a>
                        </li>
                        <li class="nav-item">
                            <a class="nav-link text-white" href="{{ route('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Sair</a>

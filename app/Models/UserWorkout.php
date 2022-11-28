@@ -45,7 +45,19 @@ class UserWorkout extends Pivot
      */
     protected $fillable = [
         'workout_id',
-        'users_id'
+        'user_id'
     ];
+
+
+    public function workouts()
+    {
+        return $this->hasMany(Workout::class, 'id','workout_id');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'id','user_id');
+    }
+
 
 }

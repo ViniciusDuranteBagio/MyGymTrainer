@@ -85,7 +85,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'created_at',
-        'updated_at'
     ];
 
     /**
@@ -100,12 +99,11 @@ class User extends Authenticatable
 
     public function workouts()
     {
-        return $this->belongsToMany(Workout::class, "user_workout")->using(UserWorkout::class)->withPivot([]);
+        return $this->belongsToMany(Workout::class, "user_workout")->using(UserWorkout::class)->withPivot(['updated_at']);
     }
 
     public function findByEmail($email)
     {
         return User::where('email','=', $email)->first();
     }
-
 }

@@ -62,17 +62,17 @@ class UserWorkoutHistory extends Model
 
     public function workouts()
     {
-        return $this->hasMany(Workout::class, 'id');
+        return $this->hasMany(Workout::class, 'id','workout_id');
     }
 
     public function exercises()
     {
-        return $this->hasMany(Exercise::class, 'id');
+        return $this->hasMany(Exercise::class, 'id','exercise_id');
     }
 
     public function users()
     {
-        return $this->hasMany(User::class, 'id' );
+        return $this->hasMany(User::class, 'id','user_id');
     }
 
 }

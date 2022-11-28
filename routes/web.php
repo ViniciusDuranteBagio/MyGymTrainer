@@ -21,9 +21,7 @@ Route::get('/', function(){
     return view('index');
 })->name("index");
 
-Route::get('/ranking', function(){
-    return view('ranking');
-})->name("ranking");
+Route::get('/ranking', [\App\Http\Controllers\UsersController::class, 'ranking'])->name("ranking");
 
 Route::get('/login', function(){
     return view('login');
@@ -33,37 +31,25 @@ Route::get('/register', function(){
     return view('register');
 })->name("register");
 
-Route::get('/treino-em-andamento', function(){
-    return view('inProgressWorkout');
-})->name("inProgressWorkout");
+Route::get('/treino-em-andamento/{id}', [\App\Http\Controllers\WorkoutController::class, "inProgressWorkout"])->name("inProgressWorkout");
 
 Route::get('/treino-finalizado', function(){
     return view('workoutCompleted');
 })->name("workoutCompleted");
 
-Route::get('/treino-iniciar', function(){
-    return view('workout');
-})->name("workout");
+Route::get('/treino-iniciar/{id}', [\App\Http\Controllers\WorkoutController::class, "startWorkout"])->name("workout");
 
-Route::get('/minha-conta', function(){
-    return view('myAccount');
-})->name("myAccount");
+Route::get('/minha-conta/{id}', [\App\Http\Controllers\UsersController::class, 'myAccount'])->name("myAccount");
 
-Route::get('/editar-minha-conta', function(){
-    return view('editAccount');
-})->name("editAccount");
+Route::get('/editar-minha-conta/{id}', [\App\Http\Controllers\UsersController::class, 'editMyAcount'])->name("editAccount");
 
 Route::get('/trocar-senha', function(){
     return view('editPassword');
 })->name("editPassword");
 
-Route::get('/troca-treino', function(){
-    return view('changeWorkout');
-})->name("changeWorkout");
+Route::get('/troca-treino/{id}',[\App\Http\Controllers\UsersController::class, "changeWorkout"])->name("changeWorkout");
 
-Route::get('/vencimento', function(){
-    return view('expireDate');
-})->name("expireDate");
+Route::get('/vencimento/{id}', [\App\Http\Controllers\UsersController::class, "contract"])->name("expireDate");
 
 Route::group(['middleware' => ['auth']], function() {
 

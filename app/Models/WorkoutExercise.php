@@ -59,12 +59,12 @@ class WorkoutExercise extends Pivot
 
     public function workouts()
     {
-        return $this->hasMany(Workout::class, 'id');
+        return $this->hasMany(Workout::class, 'id','workout_id');
     }
 
     public function exercises()
     {
-        return $this->hasMany(Exercise::class, 'id');
+        return $this->hasMany(Exercise::class, 'id','exercise_id');
     }
 
 
