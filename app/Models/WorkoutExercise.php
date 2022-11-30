@@ -67,5 +67,12 @@ class WorkoutExercise extends Pivot
         return $this->hasMany(Exercise::class, 'id','exercise_id');
     }
 
+    public static function updateExerciseForWorktou($workoutId, $exerciseId, $weight)
+    {
+        $exercise = WorkoutExercise::where('workout_id','=',$workoutId)->where('exercise_id','=',$exerciseId)->first();
+        $exercise->weight = $weight ?: 0;
+        $exercise->save();
+    }
+
 
 }

@@ -48,9 +48,6 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                           <h5 class="nav-link text-white"> Olá {{Auth::user()->name}} para onde deseja ir ? </h5>
-                        </li>
                        <li class="nav-item">
                            <a class="nav-link text-white" href="{{ route('ranking') }}"><i class="fa-solid fa-medal me-2"></i>Ranking</a>
                        </li>

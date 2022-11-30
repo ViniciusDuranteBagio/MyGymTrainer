@@ -33,9 +33,7 @@ Route::get('/register', function(){
 
 Route::get('/treino-em-andamento/{id}', [\App\Http\Controllers\WorkoutController::class, "inProgressWorkout"])->name("inProgressWorkout");
 
-Route::get('/treino-finalizado', function(){
-    return view('workoutCompleted');
-})->name("workoutCompleted");
+Route::get('/treino-finalizado/{id}', [\App\Http\Controllers\WorkoutController::class, "workoutCompleted"])->name("workoutCompleted");
 
 Route::get('/treino-iniciar/{id}', [\App\Http\Controllers\WorkoutController::class, "startWorkout"])->name("workout");
 

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    fazer um calendario para ver os dias do mes e quando a pessoa foi colocar verdinho o dia
+    <div class="container mb-4">
+        <h1 class="text-center"> Bem Vindo ao My Gym Trainer {{Auth::user()->name}}</h1>
+    </div>
 @endsection
-    
+

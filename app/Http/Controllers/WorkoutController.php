@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exercise;
 use App\Models\User;
 use App\Models\Workout;
+use App\Models\WorkoutExercise;
+use App\Models\WorkoutHistory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Kint\Kint;
 use Spatie\FlareClient\Http\Exceptions\NotFound;
 use Spatie\FlareClient\Http\Response;
 
@@ -21,17 +26,6 @@ class WorkoutController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -43,29 +37,32 @@ class WorkoutController extends Controller
         return $workout;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function updateExercise(Request $resquest)
     {
-        //
+        $requestParams = $resquest->request->all();
+
+        if ($requestParams){
+            $workoutId = $requestParams['workoutId'];
+            $exerciseId = $requestParams['id'];
+            $weight = $requestParams['weight'];
+        }
+
+        WorkoutExercise::updateExerciseForWorktou($workoutId, $exerciseId, $weight);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function insertDayInHistory(Request $resquest)
     {
-        //
-    }
+        $requestParams = $resquest->request->all();
 
+        if ($requestParams){
+            $clientId = $requestParams['clientId'];
+            $workoutId = $requestParams['workoutId'];
+        }
+        WorkoutHistory::insertHistory($workoutId, $clientId);
+
+
+    }
 
     public function startWorkout($id)
     {
@@ -103,7 +100,10 @@ class WorkoutController extends Controller
         $paramsWorkoutScreen = [];
         $workout = $data;
         $exercises = $data['exercises'];
+
         $exercisesParams =  $this->getExercisesParams($exercises);
+
+        $paramsWorkoutScreen['workout']['id'] = $workout['id'];
         $paramsWorkoutScreen['workout']['name'] = $workout['nm_workout'];
         $paramsWorkoutScreen['workout']['durationWorkout'] = $workout['average_workout_time'];
         $paramsWorkoutScreen['workout']['countExercieses'] = $exercisesParams['countExercieses'];
@@ -122,6 +122,7 @@ class WorkoutController extends Controller
         foreach ($exercieseData as $exercieseDatum){
             $exercisesOrder++;
 
+            $exercises[$exercisesOrder]['id'] = $exercieseDatum['id'];
             $exercises[$exercisesOrder]['image'] = $exercieseDatum['im_exercise'];
             $exercises[$exercisesOrder]['name'] = $exercieseDatum['nm_exercise'];
             $exercises[$exercisesOrder]['description'] = $exercieseDatum['description'];
@@ -145,5 +146,70 @@ class WorkoutController extends Controller
             $params['workouts'] =  $this->populateParamsWorkoutScreen($workouts[0]);
         }
         return view('inProgressWorkout', $params);
+    }
+
+    public function workoutCompleted($userId)
+    {
+        $params = [];
+        $hasWorkedOutToday = $this->hasWorkedOutToday($userId);
+
+        if (!$hasWorkedOutToday){
+         $dataScore = $this->generateScoreForWorkout($userId);
+        $params['score'] = $dataScore['score'];
+        $params['timeWorkout'] = $dataScore['timeWorkout'];
+        }
+
+        return view('workoutCompleted', $params);
+    }
+
+    public function hasWorkedOutToday($userId)
+    {
+        $workout = WorkoutHistory::all()
+            ->where('user_id','=',$userId)
+            ->where('created_at', '>',Carbon::today())
+            ->where('created_at', '<',Carbon::tomorrow());
+
+        if ($workout->count() < 2){
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public function generateScoreForWorkout($userId)
+    {
+        $data = [];
+
+        $workout = WorkoutHistory::all()->where('user_id','=',$userId)->where('created_at', '>',Carbon::today())->firstOrFail();
+        $timeWorkoutStart = $workout->timeWorkout;
+
+        $workoutId = $workout->workout_id;
+        $workoutTimeShouldUse = Workout::findOrFail($workoutId)->average_workout_time;
+
+        $workoutTimeUtilized = Carbon::now()->diffInMinutes($timeWorkoutStart);
+
+        $score = $this->calculateScore($workoutTimeShouldUse,$workoutTimeUtilized);
+
+        $data['timeWorkout'] = $workoutTimeUtilized;
+        $data['score'] = $score;
+        return $data;
+    }
+
+    public function calculateScore($workoutTimeShouldUse,$workoutTimeUtilized)
+    {
+        $maxScore = 300;
+
+        $time = Carbon::make($workoutTimeShouldUse);
+        $hora = $time->hour * 60;
+        $minute = $time->minute;
+        $timeSholdUsedInMinutes = $hora+$minute;
+
+        if ($workoutTimeUtilized > $timeSholdUsedInMinutes){
+            return $maxScore;
+        }else{
+            $score = $maxScore * $workoutTimeUtilized / $timeSholdUsedInMinutes;
+            return $score;
+        }
     }
 }

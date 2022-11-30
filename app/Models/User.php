@@ -96,6 +96,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static function all($columns = ['*'])
+    {
+        return parent::all($columns);
+    }
 
     public function workouts()
     {

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="container">
     @foreach ($workouts as $workout)
@@ -49,12 +50,12 @@
 
                             <div class="d-inline-block col-6">
                                 <p>Peso</p>
-                                <input type="text" class="form-control" id="wheight" size="10" value="{{$exercise['weight']}}" />
+                                <input type="text" class="form-control" id="weight{{$key}}" name="weight{{$key}}" size="10" value="{{$exercise['weight']}}" />
                             </div>
                         </form>
                     </div>
                     <div>
-{{--                        <a href="#" class="btn btn-primary mt-2">Completar Exercicio</a>--}}
+                        <button class="btn btn-primary mt-2" id="confirm{{$key}}" name="confirm{{$key}}" onclick="postToUpdateExercise({{$workout['id']}},{{$exercise['id']}},{{$key}})">Completar Exercicio</button>
                     </div>
 
                 </div>
@@ -62,8 +63,31 @@
         @endforeach
     @endforeach
     <div class="text-center" style="width:100%;">
-        <a href="http://127.0.0.1:8000/treino-finalizado" class="btn btn-primary mt-2" id="liveToastBtn">Finalizar Treino</a>
+        <a href="http://127.0.0.1:8000/treino-finalizado/{{Auth::id()}}" class="btn btn-primary mt-2" id="liveToastBtn" >Finalizar Treino</a>
     </div>
 </div>
 @endsection
+<script>
+    function postToUpdateExercise(workoutId,exerciseId,keyInput) {
+        var weightInput = document.querySelector("#weight"+keyInput);
+        var weight = weightInput.value;
+        const data = {
+            id : exerciseId,
+            weight: weight,
+            workoutId: workoutId
+        }
+        fetch("http://127.0.0.1:8000/api/workoutExercise",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
 
+        weightInput.setAttribute('disabled',true);
+        var confirmButton = document.querySelector("#confirm"+keyInput);
+        confirmButton.setAttribute('disabled','');
+
+    }
+
+</script>
