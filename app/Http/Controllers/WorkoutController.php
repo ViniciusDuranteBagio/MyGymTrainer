@@ -188,8 +188,16 @@ class WorkoutController extends Controller
         $workoutTimeShouldUse = Workout::findOrFail($workoutId)->average_workout_time;
 
         $workoutTimeUtilized = Carbon::now()->diffInMinutes($timeWorkoutStart);
-
+        
         $score = $this->calculateScore($workoutTimeShouldUse,$workoutTimeUtilized);
+        $user = User::findOrFail($userId);
+
+        if ($user){
+            $userScore = $user->nr_score;
+            $newUserScore = $userScore + $score;
+            $user->nr_score =  $newUserScore;
+            $user->save();
+        }
 
         $data['timeWorkout'] = $workoutTimeUtilized;
         $data['score'] = $score;
