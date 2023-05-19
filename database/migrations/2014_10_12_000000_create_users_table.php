@@ -18,13 +18,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone');
-            $table->string('gender', 1);
+            $table->string('phone')->nullable();
+            $table->string('gender', 1)->nullable();
+            //todo passar esse score para outra tabela do banco e ter uma tebla só pra isso
             $table->integer('nr_score')->nullable();
-            $table->date('dt_birth');
+            $table->date('dt_birth')->nullable();
             $table->string('password');
             $table->string('workout_focus')->nullable();
             $table->date('workout_updated_at')->nullable();
+            //todo passar esse contract para uma tabela de contrato
             $table->date('contract_dueDate')->nullable();
             $table->boolean('fg_change_workout')->default(0);
             $table->rememberToken();
