@@ -39,7 +39,7 @@
                       Salvar
                       </button>
             </form>
-                <a class="btn btn-danger btn-large d-inline-block" href="http://127.0.0.1:8000/minha-conta/{{Auth::id()}}" >
+                <a class="btn btn-danger btn-large d-inline-block" href="{{config("app.url")}}/minha-conta/{{Auth::id()}}" >
                 Cancelar
                 </a>
         </div>

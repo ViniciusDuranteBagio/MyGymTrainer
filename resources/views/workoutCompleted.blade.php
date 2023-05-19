@@ -12,7 +12,7 @@
                     <p class="card-text">Para terminar seu treino você levou <strong> {{$timeWorkout}} minutos </strong> </p>
                     <p class="card-text">Você acabou de ganhar <strong> {{round($score)}} GymPoints </strong> para o seu ranking mensal!!!</p>
                 </div>
-                <a href="http://127.0.0.1:8000/ranking" class="btn btn-primary ">Voltar para tela inical</a>
+                <a href="{{config("app.url")}}/ranking" class="btn btn-primary ">Voltar para tela inical</a>
             </div>
         </div>
     @else
@@ -24,7 +24,7 @@
                     </h1>
                     <p class="card-text">Você já recebeu pontos hoje portanto só poderá receber pontos amanhã</p>
                 </div>
-                <a href="http://127.0.0.1:8000/ranking" class="btn btn-primary ">Voltar para tela inical</a>
+                <a href="{{config("app.url")}}/ranking" class="btn btn-primary ">Voltar para tela inical</a>
             </div>
         </div>
     @endif

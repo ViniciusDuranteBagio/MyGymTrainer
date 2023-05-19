@@ -25,8 +25,8 @@
                     </ul>
 
                     <div class="buttons">
-                        <a class="btn btn-primary" href="http://127.0.0.1:8000/editar-minha-conta/{{Auth::id()}}">Editar Perfil</a>
-                        <a class="btn btn-outline-primary" href="http://127.0.0.1:8000/trocar-senha">Trocar Senha ?</a>
+                        <a class="btn btn-primary" href="{{config("app.url")}}/editar-minha-conta/{{Auth::id()}}">Editar Perfil</a>
+                        <a class="btn btn-outline-primary" href="{{config("app.url")}}/trocar-senha">Trocar Senha ?</a>
                     </div>
 
                 </div>

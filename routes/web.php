@@ -17,9 +17,8 @@ use \App\Http\Controllers\Auth\LogoutController;
 
 Auth::routes();
 
-Route::get('/', function(){
-    return view('index');
-})->name("index");
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
 
 Route::get('/ranking', [\App\Http\Controllers\UsersController::class, 'ranking'])->name("ranking");
 

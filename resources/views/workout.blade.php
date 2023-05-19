@@ -36,7 +36,7 @@
     @else
         <div class="container mb-4">
             <h1 class="text-center"> Você ainda não tem treinos. </h1>
-            <a type="button" class="btn btn-primary btn-lg btn-block mb-2" href="http://127.0.0.1:8000/ranking" style="width:100%;">Voltar para tela de Ranking</a>
+            <a type="button" class="btn btn-primary btn-lg btn-block mb-2" href="{{config('app.url')}}/ranking" style="width:100%;">Voltar para tela de Ranking</a>
         </div>
     @endif
 <script>
@@ -46,14 +46,15 @@
             clientId : clientId,
             workoutId: workoutId
         }
-        fetch("http://127.0.0.1:8000/api/insertWorkoutHistory",{
+        //TODO ALTERAR ESSE 127.0.0.1
+        fetch("{{config('app.url')}}/api/insertWorkoutHistory",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
         }).then((response) =>
-            window.location.href = "http://127.0.0.1:8000/treino-em-andamento/{{Auth::id()}}"
+            window.location.href = "{{config('app.url')}}/treino-em-andamento/{{Auth::id()}}"
             )
     }
 </script>

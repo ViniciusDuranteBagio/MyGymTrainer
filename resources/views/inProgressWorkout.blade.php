@@ -63,7 +63,7 @@
         @endforeach
     @endforeach
     <div class="text-center" style="width:100%;">
-        <a href="http://127.0.0.1:8000/treino-finalizado/{{Auth::id()}}" class="btn btn-primary mt-2" id="liveToastBtn" >Finalizar Treino</a>
+        <a href="{{config("app.url")}}/treino-finalizado/{{Auth::id()}}" class="btn btn-primary mt-2" id="liveToastBtn" >Finalizar Treino</a>
     </div>
 </div>
 @endsection
@@ -76,7 +76,7 @@
             weight: weight,
             workoutId: workoutId
         }
-        fetch("http://127.0.0.1:8000/api/workoutExercise",{
+        fetch('{{config("app.url")}}/api/workoutExercise',{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

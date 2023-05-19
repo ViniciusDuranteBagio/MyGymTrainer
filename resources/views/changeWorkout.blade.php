@@ -52,7 +52,7 @@
             <div class="card-body">
                 <h1 class="card-title text-center dislay-1">Você ainda não tem treino para solicitar uma troca!</h1>
                 <div class="d-grid gap-2">
-                    <a type="button" class="btn btn-primary btn-lg btn-block mb-2" href="http://127.0.0.1:8000/ranking" style="width:100%;">Voltar para tela de Ranking</a>
+                    <a type="button" class="btn btn-primary btn-lg btn-block mb-2" href="{{config('app.url')}}/ranking" style="width:100%;">Voltar para tela de Ranking</a>
                 </div>
             </div>
         </div>
