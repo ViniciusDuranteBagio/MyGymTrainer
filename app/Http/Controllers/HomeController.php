@@ -14,7 +14,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        exit('a');
         $this->middleware('auth');
     }
 
