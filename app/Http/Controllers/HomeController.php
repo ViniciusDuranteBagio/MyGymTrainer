@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        exit('a');
         //todo criar um get user logado com isso retornando o objeto do usuario
 //        if (! $this->userHasCompleteInformation()) {
             //fazer um select de experiencia em academia -> vai setar um treino padrão para o usuario
