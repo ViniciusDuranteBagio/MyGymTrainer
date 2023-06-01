@@ -25,11 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         //todo criar um get user logado com isso retornando o objeto do usuario
-        if (! $this->userHasCompleteInformation()) {
+//        if (! $this->userHasCompleteInformation()) {
             //fazer um select de experiencia em academia -> vai setar um treino padrão para o usuario
             //fazer o backend dessa tela
-            return view('formCompleteUserInformation');
-        }
+//            return view('formCompleteUserInformation');
+//        }
         return view('index');
     }
 
