@@ -140,10 +140,10 @@ class UsersController extends Controller
     public function ranking()
     {
         $params = [];
-        $usuarios = User::all();
-        $users = $this->getDataForRanking($usuarios->sortBy("nr_score"));
-        $params['usuarios'] = $users;
-        $params['rakingGeral']= $usuarios->sortBy("nr_score",4, true);
+//        $usuarios = User::all();
+//        $users = $this->getDataForRanking($usuarios->sortBy("nr_score"));
+        $params['usuarios'] = [];
+        $params['rakingGeral']= [];
         return view('ranking', $params);
     }
 
