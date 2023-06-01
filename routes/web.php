@@ -14,7 +14,6 @@ use \App\Http\Controllers\Auth\LogoutController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-try {
     Auth::routes();
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
@@ -55,8 +54,4 @@ try {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-}catch (Throwable $exception){
-    Kint::$depth_limit = 3;
-    Kint::dump($exception);
-}
 
