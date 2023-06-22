@@ -18,9 +18,13 @@
         "postcss": "^8.1.14",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.32.11",
-        "sass-loader": "^11.0.1"
+        "sass-loader": "^11.0.1",
+        "vue-loader": "^17.0.1"
     },
     "dependencies": {
-        "chart.js": "^3.8.0"
+        "chart.js": "^3.8.0",
+        "laravel": "^0.0.1",
+        "mix": "^0.0.1",
+        "vue": "^3.2.36"
     }
 }

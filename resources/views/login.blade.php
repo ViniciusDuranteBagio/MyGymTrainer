@@ -71,3 +71,9 @@
     </div>
 </div>
 @endsection
+<script>
+    import Welcome from "../js/components/Welcome";
+    export default {
+        components: {Welcome}
+    }
+</script>
