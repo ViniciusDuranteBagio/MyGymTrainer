@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('workout_id')->references('id')->on('workouts');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('nr_sequential')->nullable();
             $table->timestamps();
         });
     }
