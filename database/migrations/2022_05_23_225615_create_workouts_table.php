@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nm_workout');
             $table->time('average_workout_time');
+            $table->time('nm_difficulty');
             $table->timestamps();
         });
     }
