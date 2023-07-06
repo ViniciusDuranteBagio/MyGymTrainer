@@ -27,3 +27,4 @@ storage/*.key
 .packages
 .quarantine
 .tmb
+_ide_helper.php
