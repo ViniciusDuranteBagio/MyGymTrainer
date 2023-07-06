@@ -22,4 +22,8 @@ Route::group([
     Route::crud('workout', 'WorkoutCrudController');
     Route::crud('workout-exercise', 'WorkoutExerciseCrudController');
     Route::crud('user-workout', 'UserWorkoutCrudController');
+    Route::crud('exercise-history', 'ExerciseHistoryCrudController');
+    Route::crud('user', 'UserCrudController');
+    Route::crud('user-contract', 'UserContractCrudController');
+    Route::crud('user-score', 'UserScoreCrudController');
 }); // this should be the absolute last line of this file

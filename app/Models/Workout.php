@@ -43,7 +43,8 @@ class Workout extends Model
 
     protected $fillable = [
         'nm_workout',
-        'average_workout_time'
+        'average_workout_time',
+        'nm_difficulty'
     ];
 
     protected $hidden = [

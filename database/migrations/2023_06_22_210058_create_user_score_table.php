@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_score', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('nr_score')->nullable();
             $table->integer('nr_frequency')->nullable();

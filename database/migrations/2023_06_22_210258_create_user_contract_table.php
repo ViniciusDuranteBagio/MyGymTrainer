@@ -16,6 +16,7 @@ return new class extends Migration
         //validar se pode entrar na tela de exercicio ou não apenas se o contrato de cadastro for valido
         Schema::create('user_contract', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('contract_time')->nullable();
             $table->date('contract_dueDate')->nullable();

@@ -50,11 +50,9 @@ class UserWorkoutHistory extends Model
         'workout_id',
         'exercise_id',
         'user_id',
-        'weight',
-        'rep',
-        'sets',
-        'date'
+        'nr_sequential',
     ];
+
 
     protected $hidden = [
 

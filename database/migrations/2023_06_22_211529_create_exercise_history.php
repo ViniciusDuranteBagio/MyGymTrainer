@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('exercise_history', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('exercise_id');
             $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
-            $table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('rep');
             $table->integer('sets');
             $table->dateTime('date');

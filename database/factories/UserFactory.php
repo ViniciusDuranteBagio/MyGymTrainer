@@ -24,11 +24,9 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'phone' => $this->faker->phoneNumber(),
             'remember_token' => Str::random(10),
-            'nr_score' => $this->faker->numberBetween(0, 10000),
             'gender' => $this->faker->randomElement(['M','F']),
             'dt_birth' => $this->faker->date(),
             'workout_focus' => $this->faker->randomElement(['Emagrecimento', 'Hipertrofia', 'Saude']),
-            'contract_dueDate' => $this->faker->date(),
             'fg_change_workout' => $this->faker->boolean()
         ];
     }
